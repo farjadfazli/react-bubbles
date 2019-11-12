@@ -9,6 +9,8 @@ const BubblePage = () => {
   // fetch your colors data from the server when the component mounts
   // set that data to the colorList state property
 
+  const [refresh, setRefresh] = useState(false);
+
   useEffect(() => {
     api().get('/api/colors')
       .then(result => {
@@ -18,11 +20,11 @@ const BubblePage = () => {
       .catch(error => {
         console.log(error)
       })
-  })
+  }, [refresh])
 
   return (
     <>
-      <ColorList colors={colorList} updateColors={setColorList} />
+      <ColorList colors={colorList} updateColors={setColorList} refresh={refresh} setRefresh={setRefresh} />
       <Bubbles colors={colorList} />
     </>
   );
